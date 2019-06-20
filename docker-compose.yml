@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    # https-portal:
+    #     image: steveltn/https-portal:1
+    #     ports:
+    #       - '80:80'
+    #       - '443:443'
+    #     links:
+    #       - api
+    #     restart: always
+    #     environment:
+    #         DOMAINS: 'some.doma.in -> http://api:1323'
+    #         STAGE: 'production'
+    #         FORCE_RENEW: 'true'
+    # 
+    api:
+        container_name: yurararan
+        build: src/
+        ports:
+          - 1323:1323
+        restart: always
+        environment:
+          - BUCKET_NAME=verenav
+        volumes:
+          - /var/tmp/verenav:/verenav
