@@ -1,19 +1,19 @@
 version: "3"
 
 services:
-    # https-portal:
-    #     image: steveltn/https-portal:1
-    #     ports:
-    #       - '80:80'
-    #       - '443:443'
-    #     links:
-    #       - api
-    #     restart: always
-    #     environment:
-    #         DOMAINS: 'some.doma.in -> http://api:1323'
-    #         STAGE: 'production'
-    #         FORCE_RENEW: 'true'
-    #
+    https-portal:
+        image: steveltn/https-portal:1
+        ports:
+          - '80:80'
+          - '443:443'
+        links:
+          - api
+        restart: always
+        environment:
+            DOMAINS: 'yurararan.nothink.jp -> http://api:1323'
+            STAGE: 'production'
+            FORCE_RENEW: 'true'
+
     api:
         container_name: yurararan
         build: src/
