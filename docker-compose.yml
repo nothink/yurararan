@@ -22,7 +22,7 @@ services:
         ports:
           - 1323:1323
         restart: always
-        environment:
-          - BUCKET_NAME=verenav
+        env_file:
+          - api.env
         volumes:
           - /var/www/verenav:/verenav
