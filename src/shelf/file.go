@@ -79,7 +79,7 @@ func fetch(path string) {
 		fullPath := filepath.Join(rootPath, path)
 
 		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
-			os.MkdirAll(filepath.Dir(fullPath), 0755)
+			os.MkdirAll(filepath.Dir(fullPath), 0777)
 		}
 
 		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
