@@ -81,7 +81,7 @@ func sendUpdateMail(s []interface{}) {
 	)
 	msg.SetHtml("<html>HTML version of the body</html>")
 
-	smsg, id, err := mg.Send(message)
+	smsg, id, err := mg.Send(msg)
 	if err != nil {
 		log.Fatalf("Could not send message: %v, ID %v, %+v", err, id, smsg)
 	}
