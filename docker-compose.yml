@@ -12,7 +12,7 @@ services:
         environment:
             DOMAINS: 'yurararan.nothink.jp -> http://api:1323'
             STAGE: 'production'
-            FORCE_RENEW: 'true'
+#            FORCE_RENEW: 'true'
         volumes:
           - /var/www/certs:/var/lib/https-portal
 
