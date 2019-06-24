@@ -75,11 +75,11 @@ func sendUpdateMail(s []interface{}) {
 
 	msg := mg.NewMessage(
 		/* From */ "GRANDPA <grandpa@mail.fukita.org>",
-		/* Subject */ "VERENAV updated.",
-		/* Body */ "",
-		/* To */ "nothink@nothink.jp",
+		/* Subject */ "Verenav UPDATED.",
+		/* Body */ "updated.",
+		/* To */ "gakongakon@gmail.com",
 	)
-	msg.SetHtml("<html>HTML version of the body</html>")
+	msg.SetHtml(html)
 
 	smsg, id, err := mg.Send(msg)
 	if err != nil {
