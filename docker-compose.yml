@@ -13,7 +13,7 @@ services:
     #         DOMAINS: 'some.doma.in -> http://api:1323'
     #         STAGE: 'production'
     #         FORCE_RENEW: 'true'
-    # 
+    #
     api:
         container_name: yurararan
         build: src/
@@ -23,4 +23,4 @@ services:
         environment:
           - BUCKET_NAME=verenav
         volumes:
-          - /var/tmp/verenav:/verenav
+          - /var/www/verenav:/verenav

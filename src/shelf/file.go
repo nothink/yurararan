@@ -18,7 +18,7 @@ import (
 // TODO 外部化
 const (
 	// rootPath = "/Users/kaba/Dropbox/Wasabi/verenav/"
-	rootPath = "/var/tmp/verenav/"
+	rootPath = "/verenav/"
 )
 
 // TODO Shelf interface 化すること
