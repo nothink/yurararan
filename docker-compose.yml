@@ -14,7 +14,7 @@ services:
             STAGE: 'production'
             FORCE_RENEW: 'true'
         volumes:
-            /var/www/certs:/var/lib/https-portal
+          - /var/www/certs:/var/lib/https-portal
 
     api:
         container_name: yurararan
