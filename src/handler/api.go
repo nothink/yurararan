@@ -44,6 +44,7 @@ func PostResources(c echo.Context) error {
 	}
 
 	fmt.Println(news)
+	go sendUpdateMail(news)
 	return c.JSON(http.StatusAccepted, news)
 }
 
