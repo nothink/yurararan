@@ -48,6 +48,23 @@ func PostResources(c echo.Context) error {
 	return c.JSON(http.StatusAccepted, news)
 }
 
+// cardhash api の GET ハンドラ
+func GetCardHashes(c echo.Context) error {
+	hashes := []string{}
+	all := shelf.All()
+	const croot = "c.stat100.ameba.jp/vcard/ratio20/images/card/"
+	const pattern = "00000000000000000000000000000000"
+	const ext = ".jpg"
+	for _, item := range all {
+		key := item.(string)
+		if (len(key) == len(croot) + len(pattern) + len(ext)) && (key[:len(croot)] == croot) && key[len(croot) + len(pattern):] == ext {
+			sub := key[len(croot):len(croot) + len(pattern)]
+			hashes = append(hashes, sub)
+		}
+	}
+	return c.JSON(http.StatusOK, hashes)
+}
+
 // 更新があった時にメールを投げる
 func sendUpdateMail(s []interface{}) {
 	mg, err := mailgun.NewMailgunFromEnv()

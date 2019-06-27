@@ -23,9 +23,18 @@ func main() {
 
 	e.Use(middleware.CORSWithConfig(middleware.DefaultCORSConfig))
 
-	// resources api
+	// Resources APIs
 	e.GET("/api/v0/resources", handler.GetResources)
 	e.POST("/api/v0/resources", handler.PostResources)
+	e.GET("/api/v0/cardhashes", handler.GetCardHashes)
+
+	// // Card APIs
+	// e.GET("/api/v0/girls", handler.GetGirls)
+	// e.POST("/api/v0/girls", handler.PostGirls)
+	// e.GET("/api/v0/scenes", handler.GetScenes)
+	// e.POST("/api/v0/scenes", handler.PostScenes)
+	// e.GET("/api/v0/cards", handler.GetCards)
+	// e.POST("/api/v0/cards", handler.PostCards)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

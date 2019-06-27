@@ -2,6 +2,7 @@ version: "3"
 
 services:
     https-portal:
+        container_name: https-portal
         image: steveltn/https-portal:1
         ports:
           - '80:80'
