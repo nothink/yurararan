@@ -1,9 +1,7 @@
 FROM golang:1.11.11
 
-WORKDIR /app
 ADD . /app
-
-RUN mkdir /verenav
+WORKDIR /app
 
 RUN go build -v
 

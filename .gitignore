@@ -12,3 +12,4 @@
 *.out
 
 api.env
+src/credentials/*.json
