@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/deckarep/golang-set"
+	"github.com/kelseyhightower/envconfig"
 )
 
 
@@ -21,12 +22,20 @@ const (
 	rootPath = "/verenav/"
 )
 
+type Env struct {
+    RootPath string `split_words:"true"`
+}
+var goenv Env
+
+
 // TODO Shelf interface 化すること
 
 var allFiles mapset.Set = mapset.NewSet()
 var allMtx *sync.Mutex = new(sync.Mutex)
 
 func Init() {
+	envconfig.Process("shelf", &goenv)
+	fmt.Println(goenv)
 	allFiles = getAllFileSet()
 	go watch()
 }
