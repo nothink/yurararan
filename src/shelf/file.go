@@ -12,17 +12,14 @@ import (
 	"time"
 
 	"github.com/deckarep/golang-set"
-	"github.com/kelseyhightower/envconfig"
 )
 
-// 環境変数の値
-type Env struct {
-    RootPath string `split_words:"true"`
-}
 
-// 環境変数インスタンス
-var goenv Env
-
+// TODO 外部化
+const (
+	// rootPath = "/Users/kaba/Dropbox/Wasabi/verenav/"
+	rootPath = "/verenav/"
+)
 
 // TODO Shelf interface 化すること
 
@@ -30,7 +27,6 @@ var allFiles mapset.Set = mapset.NewSet()
 var allMtx *sync.Mutex = new(sync.Mutex)
 
 func Init() {
-	envconfig.Process("shelf", &goenv)
 	allFiles = getAllFileSet()
 	go watch()
 }
@@ -80,7 +76,7 @@ func fetch(path string) {
 		}
 		defer res.Body.Close()
 
-		fullPath := filepath.Join(goenv.RootPath, path)
+		fullPath := filepath.Join(rootPath, path)
 
 		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
 			os.MkdirAll(filepath.Dir(fullPath), 0777)
@@ -106,12 +102,12 @@ func fetch(path string) {
 func getAllFileSet() mapset.Set {
 	result := mapset.NewSet()
 
-	err := filepath.Walk(goenv.RootPath, func(path string, info os.FileInfo, err error) error{
+	err := filepath.Walk(rootPath, func(path string, info os.FileInfo, err error) error{
 		if err != nil {
 			return err
 		}
 		if !info.IsDir() {
-			keyPath := path[len(goenv.RootPath):]
+			keyPath := path[len(rootPath):]
 			result.Add(keyPath)
 		}
 		return nil
