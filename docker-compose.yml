@@ -13,6 +13,7 @@ services:
         restart: "always"
         environment:
             DOMAINS: "yurararan.nothink.jp -> http://api:1323"
+            DOMAINS: "mongo.nothink.jp -> http://mongo-express:8081"
             STAGE: "production"
 #            FORCE_RENEW: true
         volumes:
@@ -41,7 +42,7 @@ services:
     mongo-express:
         container_name: "mongo-express"
         image: "mongo-express:latest"
-        port:
+        ports:
           - "8081:8081"
         restart: "always"
         links:
