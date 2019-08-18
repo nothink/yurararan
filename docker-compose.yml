@@ -12,8 +12,7 @@ services:
           - "mongo-express"
         restart: "always"
         environment:
-            DOMAINS: "yurararan.nothink.jp -> http://api:1323"
-            DOMAINS: "mongo.nothink.jp -> http://mongo-express:8081"
+            DOMAINS: "yurararan.nothink.jp -> http://api:1323, mongo.nothink.jp -> http://mongo-express:8081"
             STAGE: "production"
 #            FORCE_RENEW: true
         volumes:
