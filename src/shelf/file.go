@@ -18,7 +18,7 @@ import (
 
 // 環境変数
 type Env struct {
-    RootPath string `split_words:"true"`
+    RootPath string `split_words:"true" default:"/"`
 }
 var goenv Env
 

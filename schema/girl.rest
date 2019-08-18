@@ -1,0 +1,3 @@
+GET /api/v1/girls/67
+Connection-Type: application/json
+Accept: application/json

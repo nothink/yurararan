@@ -1,0 +1,57 @@
+{
+  "girl": {
+    "number": 67,
+    "name": "村上文緒",
+    "spelling": "FUMIO MURAKAMI",
+    "cv": "名塚佳織",
+    "attribute": "COOL",
+    "classroom": {
+      "school": "聖櫻学園",
+      "grade": 3,
+      "class": "A"
+    },
+    "club": {
+      "category": "委員会＆団体",
+      "clubname": "図書委員会"
+    },
+    "bio": {
+      "age": 18,
+      "birthday": "2012-11-02T00:00:00.000Z",
+      "zodiac": "さそり座",
+      "body": {
+        "height": 160,
+        "weight": 45,
+        "bust": 86,
+        "waist": 56,
+        "hip": 86
+      },
+      "blood": "B"
+    },
+    "hobby": "読書",
+    "food": {
+      "favorite": "ケーキ",
+      "dislike": "レバー"
+    },
+    "best_subject": "古典",
+    "account": "humi_bookmark",
+    "flavortext": "口数が少なく、いつも本を読んでいる図書委員。\n感情表現が苦手で口下手のため、うまく他人と打ち解けられないが、それでも自分に声をかけてくれる人には感謝している。\n望月エレナと仲が良い。\n",
+    "friends": [
+      {
+        "number": 64,
+        "connection": "仲良し"
+      },
+      {
+        "number": 75,
+        "connection": "特に仲良し"
+      },
+      {
+        "number": 103,
+        "connection": "仲良し"
+      },
+      {
+        "number": 110,
+        "connection": "本好き同士"
+      }
+    ]
+  }
+}
