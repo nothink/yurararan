@@ -71,7 +71,7 @@ func watch() {
 }
 
 func fetch(path string) {
-	if strings.Contains(path, "stat100.ameba.jp") {
+	if strings.Contains(path, "stat100.ameba.jp") || strings.Contains(path, "cloudfront.net") {
 		res, err := http.Get(fmt.Sprintf("https://%v", path))
 		if err != nil {
 			log.Print("Failed: ", path, " - ", err)

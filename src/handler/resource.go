@@ -52,6 +52,7 @@ func PostResources(c echo.Context) error {
 func GetCardHashes(c echo.Context) error {
 	hashes := []string{}
 	all := shelf.All()
+	// TODO: croudfront.net対応
 	const croot = "c.stat100.ameba.jp/vcard/ratio20/images/card/"
 	const pattern = "00000000000000000000000000000000"
 	const ext = ".jpg"
