@@ -9,10 +9,9 @@ services:
           - "443:443"
         links:
           - "api"
-#          - "mongo-express"
         restart: "always"
         environment:
-            DOMAINS: "yurararan.nothink.jp -> http://api:1323, mongo.nothink.jp -> http://mongo-express:8081"
+            DOMAINS: "yurararan.nothink.jp -> http://api:1323"
             STAGE: "production"
 #            FORCE_RENEW: true
         volumes:
@@ -28,23 +27,3 @@ services:
           - "api.env"
         volumes:
           - "/var/www/verenav:/verenav"
-
-    # mongo:
-    #     container_name: "mongo"
-    #     image: "mongo:latest"
-    #     restart: "always"
-    #     env_file:
-    #       - "mongo.env"
-    #     volumes:
-    #       - "/var/db/mongo:/data/db"
-
-    # mongo-express:
-    #     container_name: "mongo-express"
-    #     image: "mongo-express:latest"
-    #     ports:
-    #       - "8081:8081"
-    #     restart: "always"
-    #     links:
-    #       - "mongo"
-    #     env_file:
-    #       - "mongo-express.env"
