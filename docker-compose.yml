@@ -9,7 +9,7 @@ services:
           - "443:443"
         links:
           - "api"
-          - "mongo-express"
+#          - "mongo-express"
         restart: "always"
         environment:
             DOMAINS: "yurararan.nothink.jp -> http://api:1323, mongo.nothink.jp -> http://mongo-express:8081"
