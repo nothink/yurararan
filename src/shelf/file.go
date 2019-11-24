@@ -11,17 +11,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/deckarep/golang-set"
+	mapset "github.com/deckarep/golang-set"
 	"github.com/kelseyhightower/envconfig"
 )
 
-
 // 環境変数
 type Env struct {
-    RootPath string `split_words:"true"`
+	RootPath string `split_words:"true"`
 }
-var goenv Env
 
+var goenv Env
 
 // TODO Shelf interface 化すること
 
@@ -79,7 +78,9 @@ func fetch(path string) {
 		}
 		defer res.Body.Close()
 
-		fullPath := filepath.Join(goenv.RootPath, path)
+		key := path[strings.IndexRune(path, '/'):]
+
+		fullPath := filepath.Join(goenv.RootPath, key)
 
 		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
 			os.MkdirAll(filepath.Dir(fullPath), 0777)
@@ -87,17 +88,17 @@ func fetch(path string) {
 
 		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
 			f, err := os.Create(fullPath)
-		    if err != nil {
-		        log.Print(err)
+			if err != nil {
+				log.Print(err)
 				return
-		    }
-		    defer f.Close()
+			}
+			defer f.Close()
 			_, err = io.Copy(f, res.Body)
 			if err != nil {
 				log.Print(err)
 				return
 			}
-			allFiles.Add(path)
+			allFiles.Add(key)
 		}
 	}
 }
@@ -105,7 +106,7 @@ func fetch(path string) {
 func getAllFileSet() mapset.Set {
 	result := mapset.NewSet()
 
-	err := filepath.Walk(goenv.RootPath, func(path string, info os.FileInfo, err error) error{
+	err := filepath.Walk(goenv.RootPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}

@@ -29,22 +29,22 @@ services:
         volumes:
           - "/var/www/verenav:/verenav"
 
-    mongo:
-        container_name: "mongo"
-        image: "mongo:latest"
-        restart: "always"
-        env_file:
-          - "mongo.env"
-        volumes:
-          - "/var/db/mongo:/data/db"
+    # mongo:
+    #     container_name: "mongo"
+    #     image: "mongo:latest"
+    #     restart: "always"
+    #     env_file:
+    #       - "mongo.env"
+    #     volumes:
+    #       - "/var/db/mongo:/data/db"
 
-    mongo-express:
-        container_name: "mongo-express"
-        image: "mongo-express:latest"
-        ports:
-          - "8081:8081"
-        restart: "always"
-        links:
-          - "mongo"
-        env_file:
-          - "mongo-express.env"
+    # mongo-express:
+    #     container_name: "mongo-express"
+    #     image: "mongo-express:latest"
+    #     ports:
+    #       - "8081:8081"
+    #     restart: "always"
+    #     links:
+    #       - "mongo"
+    #     env_file:
+    #       - "mongo-express.env"
