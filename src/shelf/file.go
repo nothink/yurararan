@@ -78,9 +78,7 @@ func fetch(path string) {
 		}
 		defer res.Body.Close()
 
-		key := path[strings.IndexRune(path, '/'):]
-
-		fullPath := filepath.Join(goenv.RootPath, key)
+		fullPath := filepath.Join(goenv.RootPath, path)
 
 		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
 			os.MkdirAll(filepath.Dir(fullPath), 0777)
@@ -98,7 +96,7 @@ func fetch(path string) {
 				log.Print(err)
 				return
 			}
-			allFiles.Add(key)
+			allFiles.Add(path)
 		}
 	}
 }

@@ -32,14 +32,12 @@ func PostResources(c echo.Context) error {
 		return err
 	}
 
-	paths := make([]interface{}, 0)
-	var path string
+	urls := make([]interface{}, 0)
 	for _, url := range post.Urls {
-		path = url[strings.IndexRune(url, '/'):]
-		paths = append(paths, path)
+		urls = append(urls, url)
 	}
 
-	news := shelf.Append(paths)
+	news := shelf.Append(urls)
 
 	if len(news) == 0 {
 		return c.JSON(http.StatusNoContent, nil)
