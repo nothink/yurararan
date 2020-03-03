@@ -1,6 +1,7 @@
 package shelf
 
-type Shelf interface{
+// Shelf シェルフ
+type Shelf interface {
 	All() []interface{}
 	Append([]interface{}) []interface{}
 }
