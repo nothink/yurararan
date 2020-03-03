@@ -15,7 +15,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
-// 環境変数
+// Env 環境変数
 type Env struct {
 	RootPath string `split_words:"true"`
 }
@@ -27,16 +27,19 @@ var goenv Env
 var allFiles mapset.Set = mapset.NewSet()
 var allMtx *sync.Mutex = new(sync.Mutex)
 
+// Init initializations
 func Init() {
 	envconfig.Process("shelf", &goenv)
 	allFiles = getAllFileSet()
 	go watch()
 }
 
+// All get all files
 func All() []interface{} {
 	return allFiles.ToSlice()
 }
 
+// Append files slice self
 func Append(s []interface{}) []interface{} {
 	if s == nil {
 		return nil
@@ -59,8 +62,9 @@ func Append(s []interface{}) []interface{} {
 	return diff.ToSlice()
 }
 
+// watch filesystem and update files
 func watch() {
-	for _ = range time.Tick(30 * time.Minute) {
+	for range time.Tick(30 * time.Minute) {
 		// 30分おきにファイルシステムのもので上書きする
 		tmpAll := getAllFileSet()
 		allMtx.Lock()
@@ -69,18 +73,20 @@ func watch() {
 	}
 }
 
-func fetch(path string) {
-	if strings.Contains(path, "stat100.ameba.jp") || strings.Contains(path, "cloudfront.net") {
-		res, err := http.Get(fmt.Sprintf("https://%v", path))
+// fetch files
+func fetch(key string) {
+	if strings.Contains(key, "c.stat100.ameba.jp") || strings.Contains(key, "stat100.ameba.jp") || strings.Contains(key, "dqx9mbrpz1jhx.cloudfront.net") {
+		res, err := http.Get(fmt.Sprintf("https://%v", key))
 		if err != nil {
-			log.Print("Failed: ", path, " - ", err)
+			log.Print("Failed: ", key, " - ", err)
 			return
 		}
 		defer res.Body.Close()
 
-		key := path[strings.IndexRune(path, '/'):]
+		// TODO: ここでドメイン付きパスkeyをパスだけにする
+		path := key[strings.Index(key, "/")+1:]
 
-		fullPath := filepath.Join(goenv.RootPath, key)
+		fullPath := filepath.Join(goenv.RootPath, path)
 
 		if _, err := os.Stat(filepath.Dir(fullPath)); os.IsNotExist(err) {
 			os.MkdirAll(filepath.Dir(fullPath), 0777)
@@ -98,11 +104,12 @@ func fetch(path string) {
 				log.Print(err)
 				return
 			}
-			allFiles.Add(key)
+			allFiles.Add(path)
 		}
 	}
 }
 
+// getAllFileSet すべてのファイル一覧を取得する
 func getAllFileSet() mapset.Set {
 	result := mapset.NewSet()
 

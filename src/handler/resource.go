@@ -1,4 +1,4 @@
-// api handler パッケージ
+// Package handler ハンドラパッケージ
 package handler
 
 import (
@@ -13,33 +13,31 @@ import (
 	"github.com/nothink/yurararan/shelf"
 )
 
-// ファイルリソースのPOST時に与える構造体
+// Resources ファイルリソースのPOST時に与える構造体
 type Resources struct {
 	Urls []string `json:"urls"`
 }
 
-// resources api の　GET ハンドラ
+// GetResources resources api の　GET ハンドラ
 func GetResources(c echo.Context) error {
 	all := shelf.All()
 
 	return c.JSON(http.StatusOK, all)
 }
 
-// resources api の POST ハンドラ
+// PostResources resources api の POST ハンドラ
 func PostResources(c echo.Context) error {
 	post := new(Resources)
 	if err := c.Bind(post); err != nil {
 		return err
 	}
 
-	paths := make([]interface{}, 0)
-	var path string
+	urls := make([]interface{}, 0)
 	for _, url := range post.Urls {
-		path = url[strings.IndexRune(url, '/'):]
-		paths = append(paths, path)
+		urls = append(urls, url)
 	}
 
-	news := shelf.Append(paths)
+	news := shelf.Append(urls)
 
 	if len(news) == 0 {
 		return c.JSON(http.StatusNoContent, nil)
@@ -50,7 +48,7 @@ func PostResources(c echo.Context) error {
 	return c.JSON(http.StatusAccepted, news)
 }
 
-// cardhash api の GET ハンドラ
+// GetCardHashes cardhash api の GET ハンドラ
 func GetCardHashes(c echo.Context) error {
 	hashes := []string{}
 	all := shelf.All()
